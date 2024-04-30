@@ -1,5 +1,6 @@
 package com.kubiki.test;
 
+import com.kubiki.test.dto.SampleDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;

@@ -1,5 +1,6 @@
 package com.kubiki.test;
 
+import com.kubiki.test.dto.SampleDto;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -16,8 +16,18 @@ public class UtilController {
         service.setDelays(sharedDelay, individualDelay, smallDelay);
     }
 
-    @PostMapping("set-external-data-url")
+    @PostMapping("set-external-database-url")
     public void setThrottle(@RequestParam String url) {
-        externalDataService.setExternalDataSource(url);
+        externalDataService.setExternalDataSourceBaseUrl(url);
+    }
+
+    @PostMapping("use-new-db")
+    public void useSlowPath() {
+        externalDataService.setUseSlowPath(true);
+    }
+
+    @PostMapping("use-old-db")
+    public void useFastPath() {
+        externalDataService.setUseSlowPath(false);
     }
 }

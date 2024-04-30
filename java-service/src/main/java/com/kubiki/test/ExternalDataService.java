@@ -1,5 +1,6 @@
 package com.kubiki.test;
 
+import com.kubiki.test.dto.SampleDto;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -12,15 +13,23 @@ import java.util.List;
 @Log4j2
 public class ExternalDataService {
 
-    public static String externalDataSource = "http://localhost:8080/test/get-data-slow";
+    public static String externalDataSourceBaseUrl = "http://localhost:8080/test/";
+
+    public static boolean useSlowPath = true;
 
 
     public List<SampleDto> getDataFromExternalSource() {
-        return new RestTemplate().getForObject(externalDataSource, List.class);
+        String subPath = useSlowPath ? "get-data-slow" : "get-data-fast";
+        return new RestTemplate().getForObject(externalDataSourceBaseUrl + subPath, List.class);
     }
 
-    public void setExternalDataSource(String externalDataSource) {
+    public void setExternalDataSourceBaseUrl(String externalDataSource) {
         log.warn(externalDataSource);
-        ExternalDataService.externalDataSource = externalDataSource;
+        ExternalDataService.externalDataSourceBaseUrl = externalDataSource;
+    }
+
+    public void setUseSlowPath(boolean useSlowPath) {
+        log.warn("====>" + useSlowPath);
+        ExternalDataService.useSlowPath = useSlowPath;
     }
 }

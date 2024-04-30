@@ -1,4 +1,4 @@
-package com.kubiki.test;
+package com.kubiki.test.dto;
 
 import lombok.Data;
 
