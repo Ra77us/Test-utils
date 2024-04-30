@@ -1,0 +1,21 @@
+import io.github.hephaestusmetrics.model.metrics.Metric;
+import com.example.droolsprototype.DroolsPrototypeApplication;
+import com.example.droolsprototype.demo.ExecutorWrapper
+import com.kubiki.controller.commons.definitons.ActionInvoker
+import com.kubiki.controller.sample.actions.ChangeDataSourceAction
+import com.kubiki.controller.sample.dto.ChangeDataSourceArgs
+import com.kubiki.controller.sample.dto.DataSource
+
+
+// rate(http_server_requests_seconds_sum{uri="/test/get-data-slow"}[10h]) / rate(http_server_requests_seconds_count{uri="/test/get-data-slow"}[10h])
+rule "test"
+    dialect "mvel"
+    when
+        executor : ExecutorWrapper()
+        metric : Metric(
+                    queryTag == "requestDuration",
+                    value > 0
+                    )
+    then
+        executor.execute(new ChangeDataSourceAction(new ChangeDataSourceArgs(DataSource.OLD_SOURCE, metric.getLabels().get("instance"))));
+end

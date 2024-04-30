@@ -2,7 +2,6 @@ package com.kubiki.controller.commons.definitons;
 
 import com.kubiki.controller.commons.annotations.complex.ComplexAction;
 import com.kubiki.controller.commons.annotations.simple.Action;
-import com.mysql.cj.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
@@ -94,7 +93,7 @@ public class ActionInvoker {
 
     // used to get name from annotation to dto if not present
     private void setActionName(ActionScheduleRequest request) {
-        if (StringUtils.isNullOrEmpty(request.getAction().getName())) {
+        if (request.getAction().getName() == null || request.getAction().getName().isEmpty()) {
             Class<?> actionClass = request.getAction().getClass();
             if (actionClass.isAnnotationPresent(Action.class)) {
                 request.getAction().setName(actionClass.getAnnotation(Action.class).name());
