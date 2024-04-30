@@ -17,7 +17,7 @@ public class DataService {
     private static final List<SampleDto> result = List.of(new SampleDto(1, "alice"), new SampleDto(2, "bob"));
     private static int sharedDelay = 100;
     private static int individualDelay = 300;
-    private static int smallDelay = 100;
+    private static int smallDelay = 300;
 
     public void setDelays(int sharedDelay, int individualDelay, int smallDelay) {
         DataService.sharedDelay = sharedDelay;
