@@ -1,4 +1,4 @@
-package com.kubiki.test;
+package com.kubiki.test.service;
 
 import com.kubiki.test.dto.SampleDto;
 import lombok.NoArgsConstructor;

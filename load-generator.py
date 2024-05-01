@@ -2,9 +2,9 @@ import requests
 import threading
 import time
 
-SLEEP = 1
-N_REQUESTS = 15
-URL = "http://localhost:8080/test/get-data-external"
+SLEEP = 1000
+N_REQUESTS = 30
+URL = "http://localhost:8080/cpu/compute"
 
 def send_request():
     try:

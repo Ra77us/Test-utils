@@ -1,6 +1,8 @@
-package com.kubiki.test;
+package com.kubiki.test.controller;
 
 import com.kubiki.test.dto.SampleDto;
+import com.kubiki.test.service.DataService;
+import com.kubiki.test.service.ExternalDataService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
