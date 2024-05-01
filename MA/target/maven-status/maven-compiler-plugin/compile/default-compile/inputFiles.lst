@@ -1,8 +1,8 @@
-D:\test-utils\Test-utils\MA\src\main\java\com\example\droolsprototype\demo\ExecutorWrapper.java
-D:\test-utils\Test-utils\MA\src\main\java\com\example\droolsprototype\demo\DemoTaskRunner.java
-D:\test-utils\Test-utils\MA\src\main\java\com\example\droolsprototype\services\PrometheusQueryService.java
-D:\test-utils\Test-utils\MA\src\main\java\com\example\droolsprototype\demo\DemoLogController.java
-D:\test-utils\Test-utils\MA\src\main\java\com\example\droolsprototype\di\DroolsConfig.java
-D:\test-utils\Test-utils\MA\src\main\java\com\example\droolsprototype\demo\DemoTask.java
-D:\test-utils\Test-utils\MA\src\main\java\com\example\droolsprototype\DroolsPrototypeApplication.java
-D:\test-utils\Test-utils\MA\src\main\java\com\example\droolsprototype\demo\SimpleDemoTask.java
+D:\Test-utils\MA\src\main\java\com\example\droolsprototype\demo\SimpleDemoTask.java
+D:\Test-utils\MA\src\main\java\com\example\droolsprototype\di\DroolsConfig.java
+D:\Test-utils\MA\src\main\java\com\example\droolsprototype\services\PrometheusQueryService.java
+D:\Test-utils\MA\src\main\java\com\example\droolsprototype\demo\DemoTaskRunner.java
+D:\Test-utils\MA\src\main\java\com\example\droolsprototype\demo\DemoTask.java
+D:\Test-utils\MA\src\main\java\com\example\droolsprototype\demo\ExecutorWrapper.java
+D:\Test-utils\MA\src\main\java\com\example\droolsprototype\demo\DemoLogController.java
+D:\Test-utils\MA\src\main\java\com\example\droolsprototype\DroolsPrototypeApplication.java

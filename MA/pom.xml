@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.kubiki</groupId>
-    <artifactId>controller</artifactId>
+    <artifactId>DroolsPrototype</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>controller</name>
-    <description>Execution Controller</description>
+    <description>Drools Prototype</description>
     <properties>
         <java.version>17</java.version>
     </properties>
