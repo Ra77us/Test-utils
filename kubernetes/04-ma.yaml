@@ -1,21 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: util-service-1
+  name: metrics-adapter
   namespace: kubiki
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: util-service-1
+      app: metrics-adapter
   template:
     metadata:
       labels:
-        app: util-service-1
+        app: metrics-adapter
     spec:
       containers:
-        - name: util-service-1
-          image: ra77us/utils-service:latest
+        - name: metrics-adapter
+          image: ra77us/utils-ma:latest
+          env:
+          - name: backend
+            value: http://hephaestus-gui.hephaestus:8080
+          - name: kubernetes-management
+            value: http://kubernetes-management.kubernetes-management:8097
           imagePullPolicy: Always
           ports:
             - containerPort: 8080 
@@ -23,14 +28,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: util-service-1
+  name: metrics-adapter
   namespace: kubiki
 spec:
   selector:
-    app: util-service-1
+    app: metrics-adapter
   type: NodePort
   ports:
     - protocol: "TCP"
       port: 8080
       targetPort: 8080
-      nodePort: 30111
+      nodePort: 31111

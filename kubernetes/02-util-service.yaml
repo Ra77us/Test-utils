@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: util-service-2
-          image: ra77us/util-service:latest
+          image: ra77us/utils-service:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080 

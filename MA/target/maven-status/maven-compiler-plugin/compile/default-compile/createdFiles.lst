@@ -1,0 +1,8 @@
+com\example\droolsprototype\demo\ExecutorWrapper.class
+com\example\droolsprototype\DroolsPrototypeApplication.class
+com\example\droolsprototype\services\PrometheusQueryService.class
+com\example\droolsprototype\demo\DemoTaskRunner.class
+com\example\droolsprototype\demo\DemoLogController.class
+com\example\droolsprototype\di\DroolsConfig.class
+com\example\droolsprototype\demo\DemoTask.class
+com\example\droolsprototype\demo\SimpleDemoTask.class
