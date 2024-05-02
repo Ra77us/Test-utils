@@ -29,7 +29,7 @@ metadata:
   name: read-secrets-global
 subjects:
   - kind: ServiceAccount
-    name: default
+    name: kubiki
     namespace: default
 roleRef:
   kind: ClusterRole
