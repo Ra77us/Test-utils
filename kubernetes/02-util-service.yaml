@@ -16,6 +16,9 @@ spec:
       containers:
         - name: util-service-2
           image: ra77us/utils-service:latest
+          resources:
+            limits:
+              cpu: "500m"
           env:
           - name: test2.slow
             value: "true"
