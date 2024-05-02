@@ -1,29 +1,31 @@
 package com.kubiki.test.service;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
 
 @Service
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Log4j2
 public class LimitedThreadsService {
 
-    private ExecutorService executorService;
-    private ExecutorService executor;
+    private final ExecutorService executorService;
+    private final ExecutorService executor;
 
-    @Value("${test3.url}")
-    private String url;
+    //@Value("${test3.url}")
+    private String url = "http://149.156.182.229:31022";
 
-    public void compute() {
-        executorService.execute(() -> new RestTemplate().getForObject(url, Integer.class));
+    public int compute() throws ExecutionException, InterruptedException {
+        log.info("compute");
+        CompletableFuture<Integer> res = CompletableFuture.supplyAsync(
+                () -> new RestTemplate().getForObject(url + "/cpu/compute", Integer.class), executorService);
+        return res.get();
     }
 
     public void setThreadsNum(int threadsNum) {
