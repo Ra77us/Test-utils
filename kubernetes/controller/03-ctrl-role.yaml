@@ -19,7 +19,7 @@ metadata:
 rules:
   - apiGroups: [""] # "" indicates the core API group
     resources: ["pods", "namespaces", "persistentvolumes", "persistentvolumeclaims", "storageclasses"]
-    verbs: ["get", "list", "delete", "patch", "create"]
+    verbs: ["get", "list", "delete", "patch", "create", "update"]
 
 ---
 
