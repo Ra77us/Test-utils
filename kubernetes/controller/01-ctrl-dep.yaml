@@ -18,7 +18,7 @@ spec:
           image: lola69456/controller:v1
           env:
             - name: db-url
-              value: http://database.mysql:3306
+              value: http://mysql.database:3306
             - name: actions.rabbit.enabled
               value: "true"
             - name: spring.rabbitmq.host
