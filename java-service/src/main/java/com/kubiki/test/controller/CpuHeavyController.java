@@ -4,6 +4,7 @@ import com.kubiki.test.service.CpuHeavyService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -16,5 +17,10 @@ public class CpuHeavyController {
     @GetMapping("compute")
     public int compute() {
         return cpuHeavyService.compute();
+    }
+
+    @GetMapping("set-num")
+    public void compute(@RequestParam int num) {
+        cpuHeavyService.setNum(num);
     }
 }

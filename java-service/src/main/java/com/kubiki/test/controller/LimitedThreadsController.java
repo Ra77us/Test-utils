@@ -23,9 +23,4 @@ public class LimitedThreadsController {
         limitedThreadsService.setThreadsNum(setThreadsDto.getThreads());
     }
 
-    @PostMapping("set-sleep")
-    public void setSleep(@RequestBody SetSleepDto setSleepDto) {
-        limitedThreadsService.setSleepTime(setSleepDto.getSleep());
-    }
-
 }

@@ -16,6 +16,9 @@ spec:
       containers:
         - name: util-service-2
           image: ra77us/utils-service:latest
+          env:
+          - name: test2.slow
+            value: "true"
           imagePullPolicy: Always
           ports:
             - containerPort: 8080 
