@@ -5,10 +5,10 @@ metadata:
 rules:
   - apiGroups: [""]
     resources: ["pods", "pods/exec", "namespaces", "persistentvolumes", "persistentvolumeclaims", "storageclasses"]
-    verbs: ["get", "list", "delete", "patch", "create"]
+    verbs: ["get", "list", "delete", "patch", "create", "update"]
   - apiGroups: ["extensions", "apps"]
     resources: ["deployments", "deployments/scale", "persistentvolumes", "persistentvolumeclaims", "storageclasses"]
-    verbs: ["get", "list", "delete", "patch", "create"]
+    verbs: ["get", "list", "delete", "patch", "create", "update"]
 ---
 
 kind: ClusterRole
