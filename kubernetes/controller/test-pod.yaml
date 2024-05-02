@@ -1,24 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: test-image
-  namespace: kubiki
+  name: bb-demo
+  namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: test-image
+      bb: web
   template:
     metadata:
       labels:
-        app: test-image
+        bb: web
     spec:
       containers:
-        - name: test-image
-          image: hello-world
-          imagePullPolicy: Always
-          resources:
-            limits:
-              cpu: "1"
-            requests:
-              cpu: "0.5"
+        - name: bb-site
+          image: getting-started
+          imagePullPolicy: Never
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bb-entrypoint
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    bb: web
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30001
