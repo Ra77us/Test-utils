@@ -16,6 +16,11 @@ spec:
       containers:
         - name: controller
           image: lola69456/controller:v1
+          env:
+          - name: actions.rabbit.enabled
+            value: "true"
+          - name: spring.rabbitmq.host
+            value: rabbit.kubiki
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
