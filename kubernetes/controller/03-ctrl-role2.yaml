@@ -27,11 +27,10 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: read-secrets-global
-  namespace: kubiki
 subjects:
   - kind: ServiceAccount
-    name: kubiki
-    namespace: default
+    name: default
+    namespace: kubiki
 roleRef:
   kind: ClusterRole
   name: pod-reader
