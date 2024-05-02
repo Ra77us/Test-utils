@@ -5,7 +5,7 @@ metadata:
 rules:
   - apiGroups: [""]
     resources: ["pods", "pods/exec", "namespaces"]
-    verbs: ["get", "list", "delete", "patch", "create"]
+    verbs: ["get", "list", "delete", "patch", "create", "update"]
   - apiGroups: ["extensions", "apps"]
     resources: ["deployments", "deployments/scale"]
     verbs: ["get", "list", "delete", "patch", "create", "update"]
