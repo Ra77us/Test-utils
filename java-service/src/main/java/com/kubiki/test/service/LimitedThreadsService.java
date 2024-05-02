@@ -24,7 +24,13 @@ public class LimitedThreadsService {
     public int compute() throws ExecutionException, InterruptedException {
         log.info("compute");
         CompletableFuture<Integer> res = CompletableFuture.supplyAsync(
-                () -> new RestTemplate().getForObject(url + "/cpu/compute", Integer.class), executorService);
+                () -> {
+                    try {
+                        return callExternalService();
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }, executorService);
         return res.get();
     }
 
@@ -32,4 +38,16 @@ public class LimitedThreadsService {
         ((ThreadPoolExecutor) executor).setCorePoolSize(threadsNum);
     }
 
+    public int callExternalService() throws InterruptedException {
+        int res = -1;
+        while (res == -1) {
+            try {
+               res = new RestTemplate().getForObject(url + "/cpu/compute", Integer.class);
+            } catch (Exception ex) {
+                log.error(ex);
+                Thread.sleep(500);
+            }
+        }
+        return res;
+    }
 }
