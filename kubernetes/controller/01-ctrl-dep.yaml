@@ -19,6 +19,10 @@ spec:
           env:
             - name: db-url
               value: http://database.mysql:3306
+            - name: actions.rabbit.enabled
+              value: "true"
+            - name: spring.rabbitmq.host
+              value: rabbit.kubiki
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

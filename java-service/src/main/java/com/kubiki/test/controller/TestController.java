@@ -18,13 +18,8 @@ public class TestController {
     private final DataService dataService;
     private final ExternalDataService externalDataService;
 
-    @GetMapping("get-data-slow")
-    public List<SampleDto> getListWithThrottling() {
-        return dataService.getDataWithThrottling();
-    }
-
-    @GetMapping("get-data-fast")
-    public List<SampleDto> egtData() {
+    @GetMapping("get-data")
+    public List<SampleDto> getData() {
         return dataService.getData();
     }
 

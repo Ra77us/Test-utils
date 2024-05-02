@@ -3,6 +3,7 @@ package com.kubiki.test.service;
 import com.kubiki.test.dto.SampleDto;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -13,19 +14,18 @@ import java.util.List;
 @Log4j2
 public class ExternalDataService {
 
-    public static String externalDataSourceBaseUrl = "http://localhost:8080/test/";
+    public static String DATA_PATH = "/get-data";
 
     public static boolean useSlowPath = true;
 
+    @Value("${test2.slow.path}")
+    private String slowPath;
+    @Value("${test2.fast.path}")
+    private String fastPath;
 
     public List<SampleDto> getDataFromExternalSource() {
-        String subPath = useSlowPath ? "get-data-slow" : "get-data-fast";
-        return new RestTemplate().getForObject(externalDataSourceBaseUrl + subPath, List.class);
-    }
-
-    public void setExternalDataSourceBaseUrl(String externalDataSource) {
-        log.warn(externalDataSource);
-        ExternalDataService.externalDataSourceBaseUrl = externalDataSource;
+        String dataSource = useSlowPath ? slowPath : fastPath;
+        return new RestTemplate().getForObject(dataSource + DATA_PATH, List.class);
     }
 
     public void setUseSlowPath(boolean useSlowPath) {

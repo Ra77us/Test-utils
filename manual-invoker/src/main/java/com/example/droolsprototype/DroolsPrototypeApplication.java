@@ -8,7 +8,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 /**
  * Application entry point
  */
-@SpringBootApplication(scanBasePackages = {"com.example.droolsprototype"})
+@SpringBootApplication(scanBasePackages = {"com.example.droolsprototype", "com.kubiki.controller.commons"})
 public class DroolsPrototypeApplication {
 
     public static void main(String[] args) {
