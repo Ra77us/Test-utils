@@ -16,6 +16,9 @@ spec:
       containers:
         - name: controller
           image: lola69456/controller:v1
+          env:
+            - name: db-url
+              value: http://database.mysql:3306
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
