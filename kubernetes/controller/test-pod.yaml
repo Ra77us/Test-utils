@@ -16,7 +16,7 @@ spec:
       containers:
         - name: bb-site
           image: yeasy/simple-web
-          imagePullPolicy: Never
+          imagePullPolicy: Always
           resources:
             limits:
               cpu: "2"
