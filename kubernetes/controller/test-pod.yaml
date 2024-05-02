@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: bb-site
-          image: getting-started
+          image: hello-world
           imagePullPolicy: Never
           resources:
             limits:
