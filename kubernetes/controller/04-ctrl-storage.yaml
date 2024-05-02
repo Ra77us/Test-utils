@@ -3,4 +3,5 @@ apiVersion: storage.k8s.io/v1
 metadata:
   name: mystorage
 provisioner: kubernetes.io/no-provisioner
+allowVolumeExpansion: true
 volumeBindingMode: WaitForFirstConsumer
