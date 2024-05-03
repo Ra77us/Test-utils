@@ -40,7 +40,7 @@ rule "test3"
                 .downstreamCpu(1)
                 .downstreamNamespace("kubiki")
                 .downstreamPod("util-service-2")
-                .upstreamThreads(20)
+                .upstreamThreads(15)
                 .upstreamService(metric.getLabels().get("instance"))
                 .build()
         ));
