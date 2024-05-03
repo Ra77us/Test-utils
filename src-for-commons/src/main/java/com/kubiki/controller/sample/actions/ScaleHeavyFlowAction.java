@@ -7,6 +7,6 @@ import com.kubiki.controller.sample.dto.ScaleHeavyFlowActionArgs;
 @ComplexAction(name = "ScaleHeavyFlowAction", argClass = ScaleHeavyFlowActionArgs.class)
 public class ScaleHeavyFlowAction extends ActionBase {
     public ScaleHeavyFlowAction(ScaleHeavyFlowActionArgs args) {
-        super(args, 0, null);
+        super(args, 0, 180L);
     }
 }

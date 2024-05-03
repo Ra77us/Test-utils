@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class ChangePodCPUActionArgs {
     private String namespace;
     private String podName;
-    private String newMemorySize;
+    private String newLimits;
+    private String newRequests;
 }

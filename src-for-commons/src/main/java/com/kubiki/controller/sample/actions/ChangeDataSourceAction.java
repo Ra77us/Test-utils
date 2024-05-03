@@ -7,6 +7,6 @@ import com.kubiki.controller.sample.dto.ChangeDataSourceArgs;
 @Action(name = "ChangeDataSource", argClass = ChangeDataSourceArgs.class)
 public class ChangeDataSourceAction extends ActionBase {
     public ChangeDataSourceAction(ChangeDataSourceArgs args) {
-        super(args, 1, 10L);
+        super(args, 1, 60L);
     }
 }

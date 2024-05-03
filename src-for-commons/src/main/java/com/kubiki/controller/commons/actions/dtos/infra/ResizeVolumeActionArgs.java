@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResizeVolumeActionArgs {
-    private String namespace;
-    private String pvcName;
+    private String pvName;
     private String newSize;
 }
