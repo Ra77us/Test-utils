@@ -25,7 +25,7 @@ public class Controller {
     @GetMapping()
     public void getMapping() {
         actionInvoker.invokeViaRabbit(new ChangePodCPUAction(new ChangePodCPUActionArgs(
-            "kubiki", "util-service-2", "3", "3"
+            "kubiki", "util-service-2", "2", "2"
         ), 1, 1l), "", 1, 0);
     }
 

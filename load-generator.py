@@ -2,15 +2,15 @@ import requests
 import threading
 import time
 
-SLEEP = 1000
-N_REQUESTS = 10
-URL = "http://149.156.182.229:31022/cpu/compute"
+SLEEP = 15000
+N_REQUESTS = 30
+URL = "http://149.156.182.229:30111/limited-threads/compute"
 
 def send_request():
     try:
         start = time.time()
-        requests.get(URL)
-        print(time.time() - start)
+        res = requests.get(URL).content
+        print(time.time() - start, res)
     except (KeyboardInterrupt, SystemExit) as e:
         raise e
     except Exception:
