@@ -32,7 +32,7 @@ rule "test3"
         executor : ExecutorWrapper()
         metric : Metric(
                     queryTag == "scalableExecutorQueuedTasks",
-                    value > 2
+                    value > 0.5
                 )
     then
         executor.execute(new ScaleHeavyFlowAction(
