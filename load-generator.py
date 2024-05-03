@@ -2,8 +2,8 @@ import requests
 import threading
 import time
 
-SLEEP = 15000
-N_REQUESTS = 30
+SLEEP = 15
+N_REQUESTS = 3
 URL = "http://149.156.182.229:30111/limited-threads/compute"
 
 def send_request():
