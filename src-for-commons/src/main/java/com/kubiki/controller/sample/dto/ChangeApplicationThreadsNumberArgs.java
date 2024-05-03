@@ -8,6 +8,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class ChangeApplicationThreadsNumberArgs {
     private int threads;
-    @JsonIgnore
-    String url;
+    private String url;
 }
