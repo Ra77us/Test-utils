@@ -7,6 +7,8 @@ import com.kubiki.controller.sample.dto.ChangeDataSourceArgs
 import com.kubiki.controller.sample.dto.DataSource
 import com.kubiki.controller.sample.actions.ScaleHeavyFlowAction
 import com.kubiki.controller.sample.dto.ScaleHeavyFlowActionArgs
+import com.kubiki.controller.sample.actions.infra.ResizeVolumeAction
+import com.kubiki.controller.commons.actions.dtos.infra.ResizeVolumeActionArgs
 
 
 // avg_over_time(http_server_requests_seconds_sum{uri="/test/get-data-slow"}[2m]) / avg_over_time(http_server_requests_seconds_count{uri="/test/get-data-slow"}[2m])
@@ -41,5 +43,62 @@ rule "test3"
                 .upstreamThreads(20)
                 .upstreamService(metric.getLabels().get("instance"))
                 .build()
+        ));
+end
+
+rule "kinia-test20"
+    dialect "mvel"
+    when
+        executor : ExecutorWrapper()
+        metric : Metric(
+                    name == "volume_usage",
+                    value > 10
+          )
+    then
+        executor.execute(new ResizeVolumeAction(
+                new ResizeVolumeActionArgs(
+                    "pvName",
+                    "20Mi"
+                ),
+                0,
+                0
+        ));
+end
+
+rule "kinia-test21"
+    dialect "mvel"
+    when
+        executor : ExecutorWrapper()
+        metric : Metric(
+                    queryTag == "scalableExecutorQueuedTasks",
+                    value > 15
+        )
+    then
+        executor.execute(new ResizeVolumeAction(
+                new ResizeVolumeActionArgs(
+                    "pvName",
+                    "30Mi"
+                ),
+                0,
+                0
+        ));
+end
+
+rule "kinia-test22"
+    dialect "mvel"
+    when
+        executor : ExecutorWrapper()
+        metric : Metric(
+                    name == "scalableExecutorQueuedTasks",
+                    value < 5
+       )
+    then
+        executor.execute(new ResizeVolumeAction(
+                new ResizeVolumeActionArgs(
+                    "pvName",
+                    "10Mi"
+                ),
+                0,
+                0
         ));
 end
