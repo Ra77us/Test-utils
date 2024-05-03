@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: metrics-adapter
-          image: lola69456/metrics-adapter:v1
+          image: ra77us/utils-ma:latest
           env:
           - name: backend
             value: http://hephaestus-gui.hephaestus:8080

@@ -37,7 +37,7 @@ rule "test3"
     then
         executor.execute(new ScaleHeavyFlowAction(
                 ScaleHeavyFlowActionArgs.builder()
-                .downstreamCpu(2)
+                .downstreamCpu(1)
                 .downstreamNamespace("kubiki")
                 .downstreamPod("util-service-2")
                 .upstreamThreads(20)

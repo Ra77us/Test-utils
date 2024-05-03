@@ -7,6 +7,8 @@ import com.kubiki.controller.sample.dto.ChangeDataSourceArgs
 import com.kubiki.controller.sample.dto.DataSource
 import com.kubiki.controller.sample.actions.ScaleHeavyFlowAction
 import com.kubiki.controller.sample.dto.ScaleHeavyFlowActionArgs
+import com.kubiki.controller.sample.actions.infra.ResizeVolumeAction
+import com.kubiki.controller.commons.actions.dtos.infra.ResizeVolumeActionArgs
 
 
 // avg_over_time(http_server_requests_seconds_sum{uri="/test/get-data-slow"}[2m]) / avg_over_time(http_server_requests_seconds_count{uri="/test/get-data-slow"}[2m])
@@ -35,11 +37,68 @@ rule "test3"
     then
         executor.execute(new ScaleHeavyFlowAction(
                 ScaleHeavyFlowActionArgs.builder()
-                .downstreamCpu(2)
+                .downstreamCpu(1)
                 .downstreamNamespace("kubiki")
                 .downstreamPod("util-service-2")
                 .upstreamThreads(20)
                 .upstreamService(metric.getLabels().get("instance"))
                 .build()
+        ));
+end
+
+rule "kinia-test20"
+    dialect "mvel"
+    when
+        executor : ExecutorWrapper()
+        metric : Metric(
+                    name == "volume_usages",
+                    value > 10 && value < 15
+          )
+    then
+        executor.execute(new ResizeVolumeAction(
+                new ResizeVolumeActionArgs(
+                    "pv-name",
+                    "20Mi"
+                ),
+                0,
+                0
+        ));
+end
+
+rule "kinia-test21"
+    dialect "mvel"
+    when
+        executor : ExecutorWrapper()
+        metric : Metric(
+                    name == "volume_usages",
+                    value > 15
+        )
+    then
+        executor.execute(new ResizeVolumeAction(
+                new ResizeVolumeActionArgs(
+                    "pv-name",
+                    "30Mi"
+                ),
+                0,
+                0
+        ));
+end
+
+rule "kinia-test22"
+    dialect "mvel"
+    when
+        executor : ExecutorWrapper()
+        metric : Metric(
+                    name == "volume_usages",
+                    value < 5
+       )
+    then
+        executor.execute(new ResizeVolumeAction(
+                new ResizeVolumeActionArgs(
+                    "pv-name",
+                    "10Mi"
+                ),
+                0,
+                0
         ));
 end
