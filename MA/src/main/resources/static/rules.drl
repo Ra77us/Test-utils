@@ -51,8 +51,8 @@ rule "kinia-test20"
     when
         executor : ExecutorWrapper()
         metric : Metric(
-                    name == "volume_usage",
-                    value > 10
+                    name == "volume_usages",
+                    value > 10 && value < 15
           )
     then
         executor.execute(new ResizeVolumeAction(
@@ -70,7 +70,7 @@ rule "kinia-test21"
     when
         executor : ExecutorWrapper()
         metric : Metric(
-                    queryTag == "scalableExecutorQueuedTasks",
+                    name == "volume_usages",
                     value > 15
         )
     then
@@ -89,7 +89,7 @@ rule "kinia-test22"
     when
         executor : ExecutorWrapper()
         metric : Metric(
-                    name == "scalableExecutorQueuedTasks",
+                    name == "volume_usages",
                     value < 5
        )
     then
