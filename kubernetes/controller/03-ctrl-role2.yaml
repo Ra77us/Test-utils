@@ -17,7 +17,7 @@ metadata:
   namespace: default
   name: pod-reader
 rules:
-  - apiGroups: [""] # "" indicates the core API group
+  - apiGroups: ["", "apps"] # "" indicates the core API group
     resources: ["deployments", "pods", "namespaces", "persistentvolumes", "persistentvolumeclaims", "storageclasses"]
     verbs: ["get", "list", "delete", "patch", "create", "update"]
 
