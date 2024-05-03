@@ -57,7 +57,7 @@ rule "kinia-test20"
     then
         executor.execute(new ResizeVolumeAction(
                 new ResizeVolumeActionArgs(
-                    "pvName",
+                    "pv-name",
                     "20Mi"
                 ),
                 0,
@@ -76,7 +76,7 @@ rule "kinia-test21"
     then
         executor.execute(new ResizeVolumeAction(
                 new ResizeVolumeActionArgs(
-                    "pvName",
+                    "pv-name",
                     "30Mi"
                 ),
                 0,
@@ -95,7 +95,7 @@ rule "kinia-test22"
     then
         executor.execute(new ResizeVolumeAction(
                 new ResizeVolumeActionArgs(
-                    "pvName",
+                    "pv-name",
                     "10Mi"
                 ),
                 0,
