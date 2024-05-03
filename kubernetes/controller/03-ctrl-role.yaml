@@ -4,7 +4,7 @@ metadata:
   name: test
 rules:
   - apiGroups: [""]
-    resources: ["pods", "pods/exec", "namespaces", "persistentvolumes", "persistentvolumeclaims", "storageclasses"]
+    resources: ["deployments", "pods", "pods/exec", "namespaces", "persistentvolumes", "persistentvolumeclaims", "storageclasses"]
     verbs: ["get", "list", "delete", "patch", "create", "update"]
   - apiGroups: ["extensions", "apps"]
     resources: ["deployments", "deployments/scale", "persistentvolumes", "persistentvolumeclaims", "storageclasses"]
@@ -18,7 +18,7 @@ metadata:
   name: pod-reader
 rules:
   - apiGroups: [""] # "" indicates the core API group
-    resources: ["pods", "namespaces", "persistentvolumes", "persistentvolumeclaims", "storageclasses"]
+    resources: ["deployments", "pods", "namespaces", "persistentvolumes", "persistentvolumeclaims", "storageclasses"]
     verbs: ["get", "list", "delete", "patch", "create", "update"]
 
 ---
