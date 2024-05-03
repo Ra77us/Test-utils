@@ -5,10 +5,12 @@ import com.kubiki.controller.commons.definitons.ActionInvoker
 import com.kubiki.controller.sample.actions.ChangeDataSourceAction
 import com.kubiki.controller.sample.dto.ChangeDataSourceArgs
 import com.kubiki.controller.sample.dto.DataSource
+import com.kubiki.controller.sample.actions.ScaleHeavyFlowAction
+import com.kubiki.controller.sample.dto.ScaleHeavyFlowActionArgs
 
 
 // rate(http_server_requests_seconds_sum{uri="/test/get-data-slow"}[2m]) / rate(http_server_requests_seconds_count{uri="/test/get-data-slow"}[2m])
-rule "test"
+rule "test2"
     dialect "mvel"
     when
         executor : ExecutorWrapper()
@@ -18,4 +20,26 @@ rule "test"
                     )
     then
         executor.execute(new ChangeDataSourceAction(new ChangeDataSourceArgs(DataSource.OLD_SOURCE, metric.getLabels().get("instance"))));
+end
+
+// rate(executor_queued_tasks{instance="util-service-1.kubiki:8080"}[5m])
+// todo
+rule "test3"
+    dialect "mvel"
+    when
+        executor : ExecutorWrapper()
+        metric : Metric(
+                    name == "scalableExecutorQueuedTasks",
+                    value > 2
+                )
+    then
+        executor.execute(new ScaleHeavyFlowAction(
+                ScaleHeavyFlowActionArgs.builder()
+                .downstreamCpu(2)
+                .downstreamNamespace("kubiki")
+                .downstreamPod("util-service-2")
+                .upstreamThreads(20)
+                .upstreamService(metric.getLabels().get("instance"))
+                .build()
+        ));
 end
