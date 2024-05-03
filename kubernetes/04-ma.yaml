@@ -13,6 +13,7 @@ spec:
       labels:
         app: metrics-adapter
     spec:
+      terminationGracePeriodSeconds: 40
       containers:
         - name: metrics-adapter
           image: ra77us/utils-ma:latest
