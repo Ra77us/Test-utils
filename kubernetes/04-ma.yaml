@@ -20,7 +20,7 @@ spec:
           - name: backend
             value: http://hephaestus-gui.hephaestus:8080
           - name: actions.controllers.master.address
-            value: http://controller.kubiki:8080
+            value: http://controller.kubiki:8080/
           - name: actions.rabbit.enabled
             value: "true"
           - name: spring.rabbitmq.host
