@@ -19,8 +19,12 @@ spec:
           env:
           - name: backend
             value: http://hephaestus-gui.hephaestus:8080
-          - name: kubernetes-management
+          - name: actions.controllers.master.address
             value: http://controller.kubiki:8080
+          - name: actions.rabbit.enabled
+            value: "true"
+          - name: spring.rabbitmq.host
+            value: rabbit.kubiki
           imagePullPolicy: Always
           ports:
             - containerPort: 8080 

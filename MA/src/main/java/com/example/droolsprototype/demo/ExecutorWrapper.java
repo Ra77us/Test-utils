@@ -13,7 +13,7 @@ public class ExecutorWrapper {
 
     public <T extends ActionBase> void execute(T action) {
         try {
-            actionInvoker.invokeAction(action);
+            actionInvoker.invokeViaRabbit(action, "test", 0, 0);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
