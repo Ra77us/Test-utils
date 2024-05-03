@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreatePVandPVCActionArgs {
     private String namespace;
-    private String apiVersion;
     private String persistentVolumeName;
     private String persistentVolumeClaimName;
     private String storageClassName;
