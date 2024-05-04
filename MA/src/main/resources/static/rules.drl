@@ -52,7 +52,7 @@ rule "kinia-test20"
         executor : ExecutorWrapper()
         metric : Metric(
                     name == "volume_usages",
-                    value > 10 && value < 15
+                    value > 10000000 && value < 15000000
           )
     then
         executor.execute(new ResizeVolumeAction(
@@ -61,7 +61,7 @@ rule "kinia-test20"
                     "20Mi"
                 ),
                 0,
-                0
+                60
         ));
 end
 
@@ -71,16 +71,16 @@ rule "kinia-test21"
         executor : ExecutorWrapper()
         metric : Metric(
                     name == "volume_usages",
-                    value > 15
+                    value > 17000000
         )
     then
         executor.execute(new ResizeVolumeAction(
                 new ResizeVolumeActionArgs(
                     "pv-name",
-                    "30Mi"
+                    "40Mi"
                 ),
                 0,
-                0
+                60
         ));
 end
 
@@ -90,7 +90,7 @@ rule "kinia-test22"
         executor : ExecutorWrapper()
         metric : Metric(
                     name == "volume_usages",
-                    value < 5
+                    value > 1000000 && < 5000000
        )
     then
         executor.execute(new ResizeVolumeAction(
@@ -99,6 +99,6 @@ rule "kinia-test22"
                     "10Mi"
                 ),
                 0,
-                0
+                60
         ));
 end
