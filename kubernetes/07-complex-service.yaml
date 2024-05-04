@@ -14,7 +14,7 @@ spec:
         app: complex-service
     spec:
       containers:
-        - name: kinia-service
+        - name: complex-service
           image: lola69456/complex-service:v1
           imagePullPolicy: Always
           ports:
