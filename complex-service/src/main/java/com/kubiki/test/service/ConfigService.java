@@ -14,6 +14,7 @@ public class ConfigService {
     private int frequency = 10;
     private Timer timer;
     private final ManagementService managementService;
+    private int value;
 
 
     public ConfigService(ManagementService managementService) {
@@ -24,10 +25,15 @@ public class ConfigService {
     public boolean changeFrequency(int frequency) {
         this.frequency = frequency;
         log.info("Frequency set to " + frequency);
+        stop();
+        timer = new Timer();
+        start(value);
+        log.info("Timer started with new value of frequency");
         return true;
     }
 
     public void start(int value) {
+        this.value = value;
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
