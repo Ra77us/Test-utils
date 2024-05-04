@@ -16,6 +16,10 @@ public class OperationController {
 
     @GetMapping("/count")
     public int count(@RequestParam(required = false) int value) {
-        return operationService.padovanSequence(value);
+        Thread thread = new Thread(() -> {
+            operationService.padovanSequence(value);
+        });
+        thread.start();
+        return 0;
     }
 }
