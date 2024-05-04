@@ -4,9 +4,13 @@ import com.kubiki.controller.commons.actions.dtos.MockRetryActionArgs;
 import com.kubiki.controller.commons.actions.dtos.infra.ChangePodCPUActionArgs;
 import com.kubiki.controller.commons.definitons.ActionInvoker;
 import com.kubiki.controller.commons.definitons.ActionScheduleRequest;
+import com.kubiki.controller.sample.actions.ChangeApplicationThreadsNumberAction;
 import com.kubiki.controller.sample.actions.FailingAction;
 import com.kubiki.controller.sample.actions.MockRetryAction;
+import com.kubiki.controller.sample.actions.ScaleHeavyFlowAction;
 import com.kubiki.controller.sample.actions.infra.ChangePodCPUAction;
+import com.kubiki.controller.sample.dto.ChangeApplicationThreadsNumberArgs;
+import com.kubiki.controller.sample.dto.ScaleHeavyFlowActionArgs;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +28,8 @@ public class Controller {
 
     @GetMapping()
     public void getMapping() {
-        actionInvoker.invokeViaRabbit(new ChangePodCPUAction(new ChangePodCPUActionArgs(
-            "kubiki", "util-service-2", "2", "2"
-        ), 1, 1l), "", 1, 0);
+        actionInvoker.invokeAction(new ChangeApplicationThreadsNumberAction(new ChangeApplicationThreadsNumberArgs(1, "http://" + "149.156.182.229:30111" + "/limited-threads/set-threads"
+               )));
     }
 
     @GetMapping("test6")

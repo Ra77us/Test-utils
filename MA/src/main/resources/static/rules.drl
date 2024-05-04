@@ -32,15 +32,15 @@ rule "test3"
         executor : ExecutorWrapper()
         metric : Metric(
                     queryTag == "scalableExecutorQueuedTasks",
-                    value > 2
+                    value > 0.5
                 )
     then
         executor.execute(new ScaleHeavyFlowAction(
                 ScaleHeavyFlowActionArgs.builder()
-                .downstreamCpu(2)
+                .downstreamCpu(1)
                 .downstreamNamespace("kubiki")
                 .downstreamPod("util-service-2")
-                .upstreamThreads(20)
+                .upstreamThreads(15)
                 .upstreamService(metric.getLabels().get("instance"))
                 .build()
         ));

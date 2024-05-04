@@ -2,7 +2,7 @@ import requests
 import threading
 import time
 
-SLEEP = 15
+SLEEP = 18
 N_REQUESTS = 3
 URL = "http://149.156.182.229:30111/limited-threads/compute"
 
