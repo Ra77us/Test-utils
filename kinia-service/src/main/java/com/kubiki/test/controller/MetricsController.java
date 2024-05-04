@@ -3,6 +3,7 @@ package com.kubiki.test.controller;
 import com.kubiki.test.service.MetricsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,7 +22,7 @@ public class MetricsController {
         metricsService.decrement(value);
     }
 
-    @PostMapping("/reset")
+    @GetMapping("/reset")
     public void resetMetricValue() {
         metricsService.reset();
     }
