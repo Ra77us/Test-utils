@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -26,15 +27,23 @@ public class Controller {
 
     private final ActionInvoker actionInvoker;
 
-    @GetMapping()
-    public void getMapping() {
-        actionInvoker.invokeAction(new ChangeApplicationThreadsNumberAction(new ChangeApplicationThreadsNumberArgs(1, "http://" + "149.156.182.229:30111" + "/limited-threads/set-threads"
-               )));
-    }
-
     @GetMapping("test6")
-    public void test6() {
-        ActionScheduleRequest request = new ActionScheduleRequest(new FailingAction(99, 0));
-        actionInvoker.invokeBatchViaRabbit(IntStream.range(0, 1000).mapToObj(i -> request).toList());
+    public void getMapping() {
+        Integer check = new RestTemplate().getForObject("http://149.156.182.229:32222/test/success-counter", Integer.class);
+        System.out.println(check);
+        for (int retry = 0; retry < 6; retry++) {
+            int finalRetry = retry;
+            List.of(10, 25, 50, 75).forEach(fail -> {
+                ActionScheduleRequest request = new ActionScheduleRequest(new FailingAction(fail, finalRetry));
+                actionInvoker.invokeBatchViaRabbit(IntStream.range(0, 1000).mapToObj(i -> request).toList());
+                try {
+                    Thread.sleep(30000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                Integer res = new RestTemplate().getForObject("http://149.156.182.229:32222/test/success-counter", Integer.class);
+                System.out.println(finalRetry + "," + fail + "," + res);
+            });
+        }
     }
 }
