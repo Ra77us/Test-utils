@@ -115,7 +115,7 @@ rule "kinia-test30"
     when
         executor : ExecutorWrapper()
         metric : Metric(
-                    queryTag == "volume_usages",
+                    queryTag == "operationDuration",
                     value > 2
        )
     then
