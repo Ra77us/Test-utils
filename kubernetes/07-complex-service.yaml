@@ -20,8 +20,8 @@ spec:
           ports:
             - containerPort: 8080
           env:
-          - name: complex.service.path
-            value: http://kinia-service.kubiki:8080/
+            - name: complex-service-path
+              value: http://kinia-service.kubiki:8080/
 ---
 apiVersion: v1
 kind: Service
