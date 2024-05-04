@@ -3,7 +3,6 @@ package com.kubiki.test.controller;
 import com.kubiki.test.service.MetricsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequiredArgsConstructor
