@@ -1,41 +1,39 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kinia-service
+  name: complex-service
   namespace: kubiki
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: kinia-service
+      app: complex-service
   template:
     metadata:
       labels:
-        app: kinia-service
+        app: complex-service
     spec:
       containers:
-        - name: kinia-service
-          image: lola69456/kinia-service:v1
+        - name: complex-service
+          image: lola69456/complex-service:v1
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
-          resources:
-            limits:
-              cpu: "2"
-            requests:
-              cpu: "1"
+          env:
+            - name: complex-service-path
+              value: http://kinia-service.kubiki:8080/
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: kinia-service
+  name: complex-service
   namespace: kubiki
 spec:
   selector:
-    app: kinia-service
+    app: complex-service
   type: NodePort
   ports:
     - protocol: "TCP"
       port: 8080
       targetPort: 8080
-      nodePort: 32211
+      nodePort: 32233

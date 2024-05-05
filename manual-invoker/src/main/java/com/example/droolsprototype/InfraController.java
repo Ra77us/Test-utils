@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/kinia")
 @AllArgsConstructor
-public class KiniaController {
+public class InfraController {
 
     private final ActionInvoker actionInvoker;
 
@@ -57,6 +57,7 @@ public class KiniaController {
                 ), 0, 0), "idempotencyKey", 0, 0);
     }
 
+    //todo change args
     @GetMapping("/change-cpu")
     public void invokeChangeCPUAction() {
         actionInvoker.invokeAction(new ChangePodCPUAction(

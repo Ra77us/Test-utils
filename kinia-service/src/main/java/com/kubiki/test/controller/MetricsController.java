@@ -21,7 +21,7 @@ public class MetricsController {
         metricsService.decrement(value);
     }
 
-    @PostMapping("/reset")
+    @GetMapping("/reset")
     public void resetMetricValue() {
         metricsService.reset();
     }

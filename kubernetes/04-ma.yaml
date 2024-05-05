@@ -16,7 +16,7 @@ spec:
       terminationGracePeriodSeconds: 40
       containers:
         - name: metrics-adapter
-          image: ra77us/utils-ma:latest
+          image: lola69456/metrics-adapter:v1
           env:
           - name: backend
             value: http://hephaestus-gui.hephaestus:8080
