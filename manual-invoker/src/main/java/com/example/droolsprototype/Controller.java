@@ -58,7 +58,7 @@ public class Controller {
         int n = 10;
         Integer check = new RestTemplate().getForObject("http://149.156.182.229:32222/test/counter", Integer.class);
         System.out.println(check);
-        List<ActionScheduleRequest> t1 =  getActions(20, 0, 0, 7).collect(toCollection(ArrayList::new));
+        List<ActionScheduleRequest> t1 =  getActions(20, 0, 0, 9).collect(toCollection(ArrayList::new));
         performTests("t1", n, t1, 10);
 //
 //        List<ActionScheduleRequest> t2 = IntStream.range(0, 100).mapToObj(i -> getActions(1, i, i / 10, 25))
