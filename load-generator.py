@@ -9,7 +9,7 @@ import time
 
 # test 2
 SLEEP = 1
-N_REQUESTS = 4
+N_REQUESTS = 1
 URL = "http://149.156.182.229:30111/test/get-data-external"
 
 def send_request():
@@ -22,7 +22,11 @@ def send_request():
     except Exception:
         pass
 
+iter = 1
 while True:
     for _ in range(N_REQUESTS):
         threading.Thread(target=send_request, daemon=True).start()
+    iter += 1
+    if iter % 100 == 0:
+        N_REQUESTS = min(4, N_REQUESTS + 1)
     time.sleep(SLEEP)
