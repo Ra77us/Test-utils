@@ -8,6 +8,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateStorageClassActionArgs {
-    private String apiVersion;
-    private String metadataName;
+    private String storageClassName;
 }
