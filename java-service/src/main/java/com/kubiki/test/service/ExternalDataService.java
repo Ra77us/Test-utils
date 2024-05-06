@@ -14,7 +14,7 @@ import java.util.List;
 @Log4j2
 public class ExternalDataService {
 
-    public static String DATA_PATH = "/get-data";
+    public static String DATA_PATH = "/test/get-data";
 
     public static boolean useSlowPath = true;
 
