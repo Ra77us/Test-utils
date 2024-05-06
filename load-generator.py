@@ -9,7 +9,7 @@ import time
 
 # test 2
 SLEEP = 1
-N_REQUESTS = 3
+N_REQUESTS = 4
 URL = "http://149.156.182.229:30111/test/get-data-external"
 
 def send_request():

@@ -21,9 +21,9 @@ public class DataService {
     private static final Lock lock = new ReentrantLock();
     private static final Random rand = new Random();
     private static final List<SampleDto> result = List.of(new SampleDto(1, "alice"), new SampleDto(2, "bob"));
-    private static int sharedDelay = 300;
-    private static int individualDelay = 100;
-    private static int smallDelay = 600;
+    private static int sharedDelay = 350;
+    private static int individualDelay = 300;
+    private static int smallDelay = 1200;
 
     @Value("${test2.slow:false}")
     private boolean isSlow;
