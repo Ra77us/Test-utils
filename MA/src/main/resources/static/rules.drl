@@ -24,7 +24,7 @@ rule "test2"
         executor : ExecutorWrapper()
         metric : Metric(
                     queryTag == "requestDuration",
-                    value > 2
+                    value > 4
                     )
     then
         executor.execute(new ChangeDataSourceAction(new ChangeDataSourceArgs(DataSource.OLD_SOURCE, metric.getLabels().get("instance"))));

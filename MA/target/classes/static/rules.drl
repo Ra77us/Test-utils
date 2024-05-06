@@ -9,6 +9,12 @@ import com.kubiki.controller.sample.actions.ScaleHeavyFlowAction
 import com.kubiki.controller.sample.dto.ScaleHeavyFlowActionArgs
 import com.kubiki.controller.sample.actions.infra.ResizeVolumeAction
 import com.kubiki.controller.commons.actions.dtos.infra.ResizeVolumeActionArgs
+import com.kubiki.controller.sample.dto.ChangeCPUAndPeriodActionArgs
+import com.kubiki.controller.sample.actions.ChangeCPUAndPeriodAction
+import com.kubiki.controller.sample.actions.ChangePeriodAction
+import com.kubiki.controller.sample.dto.ChangePeriodActionArgs
+import com.kubiki.controller.sample.actions.infra.ChangePodCPUAction
+import com.kubiki.controller.commons.actions.dtos.infra.ChangePodCPUActionArgs
 
 
 // rate(http_server_requests_seconds_sum{uri="/test/get-data-slow"}[2m]) / rate(http_server_requests_seconds_count{uri="/test/get-data-slow"}[2m])
@@ -18,7 +24,7 @@ rule "test2"
         executor : ExecutorWrapper()
         metric : Metric(
                     queryTag == "requestDuration",
-                    value > 2
+                    value > 4
                     )
     then
         executor.execute(new ChangeDataSourceAction(new ChangeDataSourceArgs(DataSource.OLD_SOURCE, metric.getLabels().get("instance"))));
@@ -101,4 +107,28 @@ rule "kinia-test22"
                 0,
                 60
         ));
+end
+
+//rate(http_server_requests_seconds_sum{uri="/operation/count"}[2m]) / rate(http_server_requests_seconds_count{uri="/operation/count"}[2m])
+rule "kinia-test30"
+    dialect "mvel"
+    when
+        executor : ExecutorWrapper()
+        metric : Metric(
+                    queryTag == "operationDuration",
+                    value > 1
+       )
+    then
+        executor.execute(new ChangeCPUAndPeriodAction(
+            new ChangeCPUAndPeriodActionArgs(
+                new ChangePodCPUActionArgs(
+                        "kubiki",
+                        "kinia-service",
+                        "3",
+                        "2"),
+                new ChangePeriodActionArgs(
+                        3000,
+                        metric.getLabels().get("instance")
+                )
+        ), 0, 120));
 end
