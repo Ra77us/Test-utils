@@ -2,9 +2,15 @@ import requests
 import threading
 import time
 
-SLEEP = 18
+# test 3
+# SLEEP = 18
+# N_REQUESTS = 3
+# URL = "http://149.156.182.229:30111/limited-threads/compute"
+
+# test 2
+SLEEP = 1
 N_REQUESTS = 3
-URL = "http://149.156.182.229:30111/limited-threads/compute"
+URL = "http://149.156.182.229:30111/test/get-data-external"
 
 def send_request():
     try:

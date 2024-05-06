@@ -39,12 +39,14 @@ public class DataService {
     }
 
     public List<SampleDto> getDataSlow() {
+        log.info("providing data slowly");
         simulateSharedResourceThrottling();
         sleep(individualDelay);
         return result;
     }
 
     public List<SampleDto> getDataFast() {
+        log.info("providing data fast");
         sleep(smallDelay);
         return result;
     }

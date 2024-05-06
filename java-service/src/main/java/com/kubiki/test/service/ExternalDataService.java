@@ -25,6 +25,7 @@ public class ExternalDataService {
 
     public List<SampleDto> getDataFromExternalSource() {
         String dataSource = useSlowPath ? slowPath : fastPath;
+        log.info("providing data from {}", dataSource + DATA_PATH);
         return new RestTemplate().getForObject(dataSource + DATA_PATH, List.class);
     }
 
