@@ -5,10 +5,13 @@ import com.kubiki.controller.commons.actions.dtos.infra.CreatePVActionArgs;
 import com.kubiki.controller.commons.actions.dtos.infra.CreatePVandPVCActionArgs;
 import com.kubiki.controller.commons.actions.dtos.infra.ResizeVolumeActionArgs;
 import com.kubiki.controller.commons.definitons.ActionInvoker;
+import com.kubiki.controller.sample.actions.ChangeCPUAndPeriodAction;
 import com.kubiki.controller.sample.actions.infra.ChangePodCPUAction;
 import com.kubiki.controller.sample.actions.infra.CreatePVAction;
 import com.kubiki.controller.sample.actions.infra.CreatePVandPVCAction;
 import com.kubiki.controller.sample.actions.infra.ResizeVolumeAction;
+import com.kubiki.controller.sample.dto.ChangeCPUAndPeriodActionArgs;
+import com.kubiki.controller.sample.dto.ChangePeriodActionArgs;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,5 +70,22 @@ public class InfraController {
                         "2",
                         "1"
                 ), 0, 0), "idempotencyKey", 0, 0);
+    }
+
+    @GetMapping("/complex")
+    public void invokeChangeCPUAndPeriod() {
+        actionInvoker.invokeAction((
+                new ChangeCPUAndPeriodAction(
+                        new ChangeCPUAndPeriodActionArgs(
+                                new ChangePodCPUActionArgs(
+                                "kubiki",
+                                        "kinia-service",
+                                        "3",
+                                        "2"
+                                ),
+                                new ChangePeriodActionArgs(
+                                        50,
+                                        "complex-service.kubiki:8080")),
+                0, 0)));
     }
 }
