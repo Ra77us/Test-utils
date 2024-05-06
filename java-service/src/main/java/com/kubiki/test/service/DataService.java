@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -18,10 +19,11 @@ import java.util.concurrent.locks.ReentrantLock;
 public class DataService {
 
     private static final Lock lock = new ReentrantLock();
+    private static final Random rand = new Random();
     private static final List<SampleDto> result = List.of(new SampleDto(1, "alice"), new SampleDto(2, "bob"));
-    private static int sharedDelay = 100;
-    private static int individualDelay = 300;
-    private static int smallDelay = 300;
+    private static int sharedDelay = 300;
+    private static int individualDelay = 100;
+    private static int smallDelay = 600;
 
     @Value("${test2.slow:false}")
     private boolean isSlow;
@@ -49,7 +51,7 @@ public class DataService {
 
     private void sleep(int time) {
         try {
-            Thread.sleep(time);
+            Thread.sleep(rand.nextInt((int)(time * 0.8), (int)(time * 1.2)));
         } catch (InterruptedException e) {
             log.error(e.getMessage(), e);
         }
