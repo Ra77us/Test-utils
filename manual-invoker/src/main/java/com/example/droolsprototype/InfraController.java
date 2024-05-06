@@ -1,17 +1,16 @@
 package com.example.droolsprototype;
 
-import com.kubiki.controller.commons.actions.dtos.infra.ChangePodCPUActionArgs;
-import com.kubiki.controller.commons.actions.dtos.infra.CreatePVActionArgs;
-import com.kubiki.controller.commons.actions.dtos.infra.CreatePVandPVCActionArgs;
-import com.kubiki.controller.commons.actions.dtos.infra.ResizeVolumeActionArgs;
+import com.kubiki.controller.commons.actions.dtos.infra.*;
 import com.kubiki.controller.commons.definitons.ActionInvoker;
 import com.kubiki.controller.sample.actions.ChangeCPUAndPeriodAction;
+import com.kubiki.controller.sample.actions.ComplexCleanUpAction;
 import com.kubiki.controller.sample.actions.infra.ChangePodCPUAction;
 import com.kubiki.controller.sample.actions.infra.CreatePVAction;
 import com.kubiki.controller.sample.actions.infra.CreatePVandPVCAction;
 import com.kubiki.controller.sample.actions.infra.ResizeVolumeAction;
 import com.kubiki.controller.sample.dto.ChangeCPUAndPeriodActionArgs;
 import com.kubiki.controller.sample.dto.ChangePeriodActionArgs;
+import com.kubiki.controller.sample.dto.ComplexCleanUpActionArgs;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -87,5 +86,21 @@ public class InfraController {
                                         50,
                                         "complex-service.kubiki:8080")),
                 0, 0)));
+    }
+
+    @GetMapping("/clean-up")
+    public void invokeCleanUp() {
+        actionInvoker.invokeAction(new ComplexCleanUpAction(
+                new ComplexCleanUpActionArgs(
+                        new CreateStorageClassActionArgs(
+                            "test-storage"
+                        ),
+                        new CreatePVActionArgs(
+                                "1",
+                                "1",
+                                "1",
+                                "1",
+                                "1"
+                )), 0, 0));
     }
 }
