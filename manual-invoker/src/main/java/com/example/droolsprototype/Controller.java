@@ -56,28 +56,28 @@ public class Controller {
         //config
         actionInvoker.invokeAction(
                 new ScaleHeavyFlowAction(new ScaleHeavyFlowActionArgs(
-                        10, "util-service-1", 1, "util-service-2", "kubiki")),
+                        10, "util-service-1.kubiki:8080", 1, "util-service-2", "kubiki")),
                 null);
         sleep(60);
-        // test
+        //test
         actionInvoker.invokeAction(
                 new ScaleHeavyFlowAction(new ScaleHeavyFlowActionArgs(
-                        20, "util-service-1", 2, "util-service-2", "kubiki")),
+                        20, "util-service-1.kubiki:8080", 2, "util-service-2", "kubiki")),
                 null);
         sleep(30);
         actionInvoker.invokeAction(
                 new ScaleHeavyFlowAction(new ScaleHeavyFlowActionArgs(
-                        30, "util-service-1", 2, "util-service-2", "kubiki")),
+                        25, "util-service-1.kubiki:8080", 1.5, "util-service-2", "kubiki")),
                 null);
         sleep(30);
         actionInvoker.invokeAction(
                 new ScaleHeavyFlowAction(new ScaleHeavyFlowActionArgs(
-                        40, "util-service-1", 2, "util-service-2", "kubiki")),
+                        40, "util-service-1.kubiki:8080", 2, "util-service-2", "kubiki")),
                 null);
         sleep(30);
         actionInvoker.invokeAction(
                 new ScaleHeavyFlowAction(new ScaleHeavyFlowActionArgs(
-                        40, "util-service-1", 4, "util-service-2", "kubiki")),
+                        40, "util-service-1.kubiki:8080", 4, "util-service-2", "kubiki")),
                 null);
     }
 
