@@ -96,7 +96,7 @@ rule "kinia-test22"
         executor : ExecutorWrapper()
         metric : Metric(
                     name == "volume_usages",
-                    value > 1000000 && < 5000000
+                    value < 9000000
        )
     then
         executor.execute(new ResizeVolumeAction(
