@@ -116,7 +116,7 @@ rule "kinia-test30"
         executor : ExecutorWrapper()
         metric : Metric(
                     queryTag == "operationDuration",
-                    value > 1
+                    value > 0.5
        )
     then
         executor.execute(new ChangeCPUAndPeriodAction(
