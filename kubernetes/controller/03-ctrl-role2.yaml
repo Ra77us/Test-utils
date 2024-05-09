@@ -6,7 +6,7 @@ rules:
   - apiGroups: [""]
     resources: ["deployments", "pods", "pods/exec", "namespaces", "persistentvolumes", "persistentvolumeclaims", "storageclasses"]
     verbs: ["get", "list", "delete", "patch", "create", "update"]
-  - apiGroups: ["extensions", "apps"]
+  - apiGroups: ["extensions", "apps", "storage.k8s.io"]
     resources: ["deployments", "deployments/scale", "persistentvolumes", "persistentvolumeclaims", "storageclasses"]
     verbs: ["get", "list", "delete", "patch", "create", "update"]
 ---
@@ -17,7 +17,7 @@ metadata:
   namespace: default
   name: pod-reader
 rules:
-  - apiGroups: ["", "apps"] # "" indicates the core API group
+  - apiGroups: ["", "apps", "storage.k8s.io"] # "" indicates the core API group
     resources: ["deployments", "pods", "namespaces", "persistentvolumes", "persistentvolumeclaims", "storageclasses"]
     verbs: ["get", "list", "delete", "patch", "create", "update"]
 
