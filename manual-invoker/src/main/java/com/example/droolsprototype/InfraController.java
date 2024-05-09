@@ -2,8 +2,10 @@ package com.example.droolsprototype;
 
 import com.kubiki.controller.commons.actions.dtos.infra.*;
 import com.kubiki.controller.commons.definitons.ActionInvoker;
+import com.kubiki.controller.commons.definitons.ActionScheduleRequest;
 import com.kubiki.controller.sample.actions.ChangeCPUAndPeriodAction;
 import com.kubiki.controller.sample.actions.ComplexCleanUpAction;
+import com.kubiki.controller.sample.actions.FailingAction;
 import com.kubiki.controller.sample.actions.infra.ChangePodCPUAction;
 import com.kubiki.controller.sample.actions.infra.CreatePVAction;
 import com.kubiki.controller.sample.actions.infra.CreatePVandPVCAction;
@@ -15,6 +17,16 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toCollection;
 
 @RestController
 @RequestMapping("/kinia")
@@ -102,5 +114,81 @@ public class InfraController {
                                 "1",
                                 "1"
                 )), 0, 0));
+    }
+
+    @GetMapping("test1")
+    public void test1() {
+        int n = 70;
+        Integer check = new RestTemplate().getForObject("http://149.156.182.229:32222/test/counter", Integer.class);
+        System.out.println(check);
+
+        List<ActionScheduleRequest> t1 = IntStream.range(0, 20).mapToObj(i -> getActions(1, i, 0, 5))
+                .flatMap(Function.identity()).collect(toCollection(ArrayList::new));
+        performTests("t1", n, t1, 8);
+
+        List<ActionScheduleRequest> t2 = IntStream.range(0, 20).mapToObj(i -> getActions(1, i, (19 - i) / 2, 10))
+                .flatMap(Function.identity()).collect(toCollection(ArrayList::new));
+        performTests("t2", n, t2, 14);
+
+        List<ActionScheduleRequest> t3 = IntStream.range(0, 20).mapToObj(i -> getActions(1, i, (19 - i) / 12, 15))
+                .flatMap(Function.identity()).collect(toCollection(ArrayList::new));
+        performTests("t3", n, t3, 16);
+
+        List<ActionScheduleRequest> t4 = IntStream.range(0, 20).mapToObj(i -> getActions(1, i, (19 - i) / 7, 3))
+                .flatMap(Function.identity()).collect(toCollection(ArrayList::new));
+        performTests("t4", n, t4, 7);
+
+        List<ActionScheduleRequest> t5 = IntStream.range(0, 20).mapToObj(i -> getActions(1, i, (19 - i) / 10, 7))
+                .flatMap(Function.identity()).collect(toCollection(ArrayList::new));
+        performTests("t5", n, t5, 17);
+
+        List<ActionScheduleRequest> t6 = IntStream.range(0, 20).mapToObj(i -> getActions(1, i, 19 - i, 19))
+                .flatMap(Function.identity()).collect(toCollection(ArrayList::new));
+        performTests("t6", n, t6, 24);
+        List<ActionScheduleRequest> t7 = IntStream.range(0, 20).mapToObj(i -> getActions(1, i, (19 - i) / 5, 7))
+                .flatMap(Function.identity()).collect(toCollection(ArrayList::new));
+        performTests("t7", n, t7, 9);
+    }
+
+    @GetMapping("test6")
+    public void test6() {
+        Integer check = new RestTemplate().getForObject("http://149.156.182.229:32222/test/success-counter", Integer.class);
+        System.out.println(check);
+        for (int retry = 0; retry < 6; retry++) {
+            int finalRetry = retry;
+            List.of(5, 15, 30, 50, 60, 80).forEach(fail -> {
+                ActionScheduleRequest request = new ActionScheduleRequest(new FailingAction(fail, finalRetry));
+                actionInvoker.invokeBatchViaRabbit(IntStream.range(0, 1000).mapToObj(i -> request).toList());
+                try {
+                    Thread.sleep(30000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                Integer res = new RestTemplate().getForObject("http://149.156.182.229:32222/test/success-counter", Integer.class);
+                System.out.println(finalRetry + "," + fail + "," + res);
+            });
+        }
+    }
+
+    private Stream<ActionScheduleRequest> getActions(int count, int priority, int delay, long window) {
+        return NumberAndDelayActionFactory.getActions(count, priority, delay, window);
+    }
+
+    private void performTests(String name, int n, List<ActionScheduleRequest> actions, int sleep) {
+        System.out.println(name);
+        for (int i = 0; i < n; i++) {
+            performTest(actions, sleep);
+        }
+    }
+
+    private void performTest(List<ActionScheduleRequest> actions, int sleep) {
+        Collections.shuffle(actions);
+        actionInvoker.invokeBatchViaRabbit(actions);
+        try {
+            Thread.sleep(sleep * 1000L);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(new RestTemplate().getForObject("http://149.156.182.229:32222/test/counter", Integer.class));
     }
 }
