@@ -12,7 +12,7 @@ public class ExecutorConfig {
     @Bean
     public ExecutorService executor() {
         ExecutorService ex = Executors.newFixedThreadPool(10);
-        ((ThreadPoolExecutor) ex).setMaximumPoolSize(10000);
+        ((ThreadPoolExecutor) ex).setMaximumPoolSize(39);
         return ex;
     }
 }

@@ -12,9 +12,7 @@ import com.kubiki.controller.sample.actions.infra.ChangePodCPUAction;
 import com.kubiki.controller.sample.dto.ChangeApplicationThreadsNumberArgs;
 import com.kubiki.controller.sample.dto.ScaleHeavyFlowActionArgs;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -51,6 +49,36 @@ public class Controller {
                 System.out.println(finalRetry + "," + fail + "," + res);
             });
         }
+    }
+
+    @PostMapping("complex")
+    public void sendComplexAction() {
+        //config
+        actionInvoker.invokeAction(
+                new ScaleHeavyFlowAction(new ScaleHeavyFlowActionArgs(
+                        10, "util-service-1", 1, "util-service-2", "kubiki")),
+                null);
+        sleep(60);
+        // test
+        actionInvoker.invokeAction(
+                new ScaleHeavyFlowAction(new ScaleHeavyFlowActionArgs(
+                        20, "util-service-1", 2, "util-service-2", "kubiki")),
+                null);
+        sleep(30);
+        actionInvoker.invokeAction(
+                new ScaleHeavyFlowAction(new ScaleHeavyFlowActionArgs(
+                        30, "util-service-1", 2, "util-service-2", "kubiki")),
+                null);
+        sleep(30);
+        actionInvoker.invokeAction(
+                new ScaleHeavyFlowAction(new ScaleHeavyFlowActionArgs(
+                        40, "util-service-1", 2, "util-service-2", "kubiki")),
+                null);
+        sleep(30);
+        actionInvoker.invokeAction(
+                new ScaleHeavyFlowAction(new ScaleHeavyFlowActionArgs(
+                        40, "util-service-1", 4, "util-service-2", "kubiki")),
+                null);
     }
 
     @GetMapping("test1")
@@ -103,6 +131,14 @@ public class Controller {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(new RestTemplate().getForObject("http://149.156.182.229:32222/test/counter", Integer.class));
+        System.out.println(new RestTemplate().getForObject("http://localhost:8080/test/counter", Integer.class));
+    }
+
+    private void sleep(int seconds) {
+        try {
+            Thread.sleep(seconds * 1000L);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
