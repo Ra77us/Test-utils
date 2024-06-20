@@ -1,6 +1,5 @@
 package com.kubiki.test.controller;
 
-import com.kubiki.test.dto.SetSleepDto;
 import com.kubiki.test.dto.SetThreadsDto;
 import com.kubiki.test.service.LimitedThreadsService;
 import lombok.AllArgsConstructor;

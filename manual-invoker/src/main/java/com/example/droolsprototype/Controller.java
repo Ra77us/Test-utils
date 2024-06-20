@@ -1,15 +1,9 @@
 package com.example.droolsprototype;
 
-import com.kubiki.controller.commons.actions.dtos.MockRetryActionArgs;
-import com.kubiki.controller.commons.actions.dtos.infra.ChangePodCPUActionArgs;
 import com.kubiki.controller.commons.definitons.ActionInvoker;
 import com.kubiki.controller.commons.definitons.ActionScheduleRequest;
-import com.kubiki.controller.sample.actions.ChangeApplicationThreadsNumberAction;
 import com.kubiki.controller.sample.actions.FailingAction;
-import com.kubiki.controller.sample.actions.MockRetryAction;
 import com.kubiki.controller.sample.actions.ScaleHeavyFlowAction;
-import com.kubiki.controller.sample.actions.infra.ChangePodCPUAction;
-import com.kubiki.controller.sample.dto.ChangeApplicationThreadsNumberArgs;
 import com.kubiki.controller.sample.dto.ScaleHeavyFlowActionArgs;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -118,7 +112,7 @@ public class Controller {
 
     private void performTests(String name, int n, List<ActionScheduleRequest> actions, int sleep) {
         System.out.println(name);
-        for (int i=0; i<n; i++) {
+        for (int i = 0; i < n; i++) {
             performTest(actions, sleep);
         }
     }

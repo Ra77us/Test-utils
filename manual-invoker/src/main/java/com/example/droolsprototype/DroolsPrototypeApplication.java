@@ -1,9 +1,7 @@
 package com.example.droolsprototype;
 
-import com.kubiki.controller.commons.definitons.ActionInvoker;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * Application entry point

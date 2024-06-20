@@ -42,7 +42,7 @@ public class LimitedThreadsService {
         int res = -1;
         while (res == -1) {
             try {
-               res = new RestTemplate().getForObject(url + "/cpu/compute", Integer.class);
+                res = new RestTemplate().getForObject(url + "/cpu/compute", Integer.class);
             } catch (Exception ex) {
                 log.error(ex);
                 Thread.sleep(500);

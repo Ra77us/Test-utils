@@ -89,7 +89,7 @@ public class InfraController {
                 new ChangeCPUAndPeriodAction(
                         new ChangeCPUAndPeriodActionArgs(
                                 new ChangePodCPUActionArgs(
-                                "kubiki",
+                                        "kubiki",
                                         "kinia-service",
                                         "3",
                                         "2"
@@ -97,7 +97,7 @@ public class InfraController {
                                 new ChangePeriodActionArgs(
                                         50,
                                         "complex-service.kubiki:8080")),
-                0, 0)));
+                        0, 0)));
     }
 
     @GetMapping("/clean-up")
@@ -105,7 +105,7 @@ public class InfraController {
         actionInvoker.invokeAction(new ComplexCleanUpAction(
                 new ComplexCleanUpActionArgs(
                         new CreateStorageClassActionArgs(
-                            "test-storage"
+                                "test-storage"
                         ),
                         new CreatePVActionArgs(
                                 "1",
@@ -113,7 +113,7 @@ public class InfraController {
                                 "1",
                                 "1",
                                 "1"
-                )), 0, 0));
+                        )), 0, 0));
     }
 
     @GetMapping("test1")

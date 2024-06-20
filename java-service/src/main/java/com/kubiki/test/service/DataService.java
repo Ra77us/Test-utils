@@ -53,7 +53,7 @@ public class DataService {
 
     private void sleep(int time) {
         try {
-            Thread.sleep(rand.nextInt((int)(time * 0.8), (int)(time * 1.2)));
+            Thread.sleep(rand.nextInt((int) (time * 0.8), (int) (time * 1.2)));
         } catch (InterruptedException e) {
             log.error(e.getMessage(), e);
         }
@@ -66,7 +66,7 @@ public class DataService {
             Thread.sleep(sharedDelay);
             log.info("{} longRunningPublish after sleep", Thread.currentThread().threadId());
         } catch (InterruptedException e) {
-            log.error(e.getMessage(),e);
+            log.error(e.getMessage(), e);
         } finally {
             lock.unlock();
         }
