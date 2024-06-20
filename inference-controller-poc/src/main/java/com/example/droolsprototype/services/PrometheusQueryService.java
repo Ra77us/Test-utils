@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Service
 public class PrometheusQueryService {
 
-    private final static String SELECTED_ENDPOINT =  "/hephaestus/metrics/selected";
+    private final static String SELECTED_ENDPOINT = "/hephaestus/metrics/selected";
 
     private final RestTemplate restTemplate;
     private final Translator translator = new Translator();

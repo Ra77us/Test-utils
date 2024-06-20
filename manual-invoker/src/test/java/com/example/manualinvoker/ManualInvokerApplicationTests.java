@@ -1,10 +1,10 @@
-package com.example.droolsprototype;
+package com.example.manualinvoker;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DroolsPrototypeApplicationTests {
+class ManualInvokerApplicationTests {
 
     @Test
     void contextLoads() {

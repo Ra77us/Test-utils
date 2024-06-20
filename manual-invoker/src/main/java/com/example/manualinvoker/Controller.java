@@ -1,4 +1,4 @@
-package com.example.droolsprototype;
+package com.example.manualinvoker;
 
 import com.kubiki.controller.commons.definitons.ActionInvoker;
 import com.kubiki.controller.commons.definitons.ActionScheduleRequest;
@@ -6,7 +6,10 @@ import com.kubiki.controller.sample.actions.FailingAction;
 import com.kubiki.controller.sample.actions.ScaleHeavyFlowAction;
 import com.kubiki.controller.sample.dto.ScaleHeavyFlowActionArgs;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;

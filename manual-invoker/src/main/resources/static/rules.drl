@@ -1,6 +1,6 @@
 import io.github.hephaestusmetrics.model.metrics.Metric;
-import com.example.droolsprototype.DroolsPrototypeApplication;
-import com.example.droolsprototype.demo.ExecutorWrapper
+import com.example.manualinvoker.ManualInvokerApplication;
+import com.example.manualinvoker.demo.ExecutorWrapper
 import com.kubiki.controller.commons.definitons.ActionInvoker
 import com.kubiki.controller.sample.actions.ChangeDataSourceAction
 import com.kubiki.controller.sample.dto.ChangeDataSourceArgs

@@ -42,7 +42,7 @@ public class DemoTask extends SimpleDemoTask {
 
             // prepare list including results and executor
             List<Object> kieInput = Stream.concat(
-                    queryResults.stream(), Stream.of(executorWrapper))
+                            queryResults.stream(), Stream.of(executorWrapper))
                     .collect(Collectors.toList());
 
             // tell drools to evaluate all rules if any metric has been added

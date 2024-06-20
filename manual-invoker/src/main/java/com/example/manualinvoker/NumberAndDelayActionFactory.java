@@ -1,4 +1,4 @@
-package com.example.droolsprototype;
+package com.example.manualinvoker;
 
 import com.kubiki.controller.commons.actions.dtos.NumberAndDelayActionArgs;
 import com.kubiki.controller.commons.definitons.ActionScheduleRequest;
